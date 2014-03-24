@@ -8,5 +8,5 @@ class Episode(object):
 		self.type = type
 
 	def calculate_duration(self, other_episode):
-		self.duration = math.fabs(self.timestamp - other_episode.timestamp) / 60
+		self.duration = round(math.fabs(self.timestamp - other_episode.timestamp) / 60, 2)
 		 
