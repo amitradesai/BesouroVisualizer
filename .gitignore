@@ -2,7 +2,7 @@
 
 # C extensions
 *.so
-
+*.csv
 # Packages
 *.egg
 *.egg-info

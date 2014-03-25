@@ -1,6 +1,7 @@
 from episode import Episode
 import re
 import csv
+import sys
 def import_from_log(file):
 	return [parse_line_episode(line.strip()) for line in open(file)]
 def parse_line_episode(line):
@@ -20,9 +21,9 @@ def write_to_csv(file, episodes):
 		for episode in episodes:
 			file.write("{0}; {1} \n".format(episode.type, episode.duration))
 
-def main():
-	episodes = calculate_durations(import_from_log("zorroEpisodes.txt"))
-	print [(episode.duration, episode.type) for episode in episodes]
-	write_to_csv("output.csv", episodes)
-
-if  __name__ =='__main__':main()
+def main(argv):
+	file = argv.split("\\")[4] + ".csv"
+	episodes = calculate_durations(import_from_log(argv + '\\zorroEpisodes.txt'))
+	write_to_csv(file, episodes)
+	print "File written in " + file
+if  __name__ =='__main__':main(sys.argv[1])
