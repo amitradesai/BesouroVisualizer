@@ -7,7 +7,7 @@ class TestBesouroVisualizer(unittest.TestCase):
 
 
 	def test(self):
-		self.assertEqual(besouro_visualizer.starting_episode(self.file_actions), 1383289599621//1000)
+		self.assertEqual(besouro_visualizer.generate_first_episode(self.file_actions), 1383289599621//1000)
 
 if __name__ == '__main__':
 	unittest.main()
