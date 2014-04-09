@@ -2,8 +2,9 @@ from episode import Episode
 import re
 import csv
 import sys
-def import_from_log(file):
-	return [parse_line_episode(line.strip()) for line in open(file)]
+def import_from_log(episode_file):
+	return [parse_line_episode(line.strip()) for line in open(episode_file)]
+
 def parse_line_episode(line):
 	line_array = re.split('\s+', line)
 	timestamp = int(line_array[0]) // 1000
@@ -16,14 +17,14 @@ def calculate_durations(episodes):
 			elem.calculate_duration(episodes[index+1])
 	return episodes
 
-def write_to_csv(file, episodes):
-	with open(file, "wb") as file:
+def write_to_csv(output_file, episodes):
+	with open(output_file, "wb") as file:
 		for episode in episodes:
-			file.write("{0}; {1} \n".format(episode.type, episode.duration))
+			output_file.write("{0}; {1} \n".format(episode.type, episode.duration))
 
 def main(argv):
-	file = argv.split("\\")[4] + ".csv"
+	output_file = argv.split("\\")[4] + ".csv"
 	episodes = calculate_durations(import_from_log(argv + '\\zorroEpisodes.txt'))
-	write_to_csv(file, episodes)
-	print "File written in " + file
+	write_to_csv(output_file, episodes)
+	print "File written in " + output_file
 if  __name__ =='__main__':main(sys.argv[1])
