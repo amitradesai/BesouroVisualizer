@@ -33,14 +33,15 @@ def generate_first_episode(actions_file):
 		return Episode(sanitize_timestamp(start_time_stamp), "dummy")
 
 def main(argv):
+	separator = os.sep
 	user_id = re.search('FS\w+\d+', argv).group()
-	zorroEpisodes_file = argv + '\\zorroEpisodes.txt'
-	actions_file = argv + '\\actions.txt'
-	episodes_without_duration = import_from_log(zorroEpisodes_file)
-	first_episode = generate_first_episode(actions_file)
-	episodes_without_duration.insert(0,first_episode)
-	episodes_with_duration = calculate_durations(episodes_without_duration)
+	zorroEpisodes_file = argv + separator + 'zorroEpisodes.txt'
+	actions_file = argv + separator + 'actions.txt'
 	output_file = "episodes.csv"
-	write_to_csv(user_id, output_file, episodes_with_duration[1:])
+	episodes_without_duration = import_from_log(zorroEpisodes_file)
+	first_episode = generate_first_episode(actions_file) #take the starting time of the first episode from the actions file
+	episodes_without_duration.insert(0,first_episode) #insert this dummy episode at the beginning of the list
+	episodes_with_duration = calculate_durations(episodes_without_duration)
+	write_to_csv(user_id, output_file, episodes_with_duration[1:]) #write the list to file excluding the dummy
 	print "File written in " + output_file
 if  __name__ =='__main__':main(sys.argv[1])
