@@ -33,7 +33,8 @@ def generate_first_episode(actions_file):
 		return Episode(sanitize_timestamp(start_time_stamp), "dummy")
 
 def main(argv):
-	print(argv)
+
+	
 	separator = os.sep
 	user_id = re.search('FS\w+\d+', argv).group()
 	zorroEpisodes_file = argv + separator + 'zorroEpisodes.txt'
@@ -45,4 +46,9 @@ def main(argv):
 	episodes_with_duration = calculate_durations(episodes_without_duration)
 	write_to_csv(user_id, output_file, episodes_with_duration[1:]) #write the list to file excluding the dummy
 	print "File written in " + output_file
-if  __name__ =='__main__':main(sys.argv[1])
+if  __name__ =='__main__':
+		if  len(sys.argv)==1 or sys.argv[1]=="-h":
+			print("Usage: python besouro_visualizer path/to/zorroEpisodes.txt")
+			sys.exit()
+		else: 
+			main(sys.argv[1])
