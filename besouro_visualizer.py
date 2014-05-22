@@ -33,6 +33,7 @@ def generate_first_episode(actions_file):
 		return Episode(sanitize_timestamp(start_time_stamp), "dummy")
 
 def main(argv):
+	print(argv)
 	separator = os.sep
 	user_id = re.search('FS\w+\d+', argv).group()
 	zorroEpisodes_file = argv + separator + 'zorroEpisodes.txt'
